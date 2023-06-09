@@ -32,15 +32,15 @@ def agregarprod(request):
     }
 
     if request.method == 'POST':
-        formulario = ProductoForm(data=request.POST,files=request.POST)
+        formulario = ProductoForm(request.POST, request.FILES)
         if formulario.is_valid():
-            formulario.save
-            data["mensaje"]= "Producto publicado"
+            formulario.save()
+            data["mensaje"] = "Producto publicado"
         else:
-            data['form']= formulario
-
+            data['form'] = formulario
 
     return render(request, 'app/producto/agregar.html', data)
+
 
 
 def listarprod(request):
