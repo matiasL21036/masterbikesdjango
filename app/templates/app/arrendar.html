@@ -1,7 +1,6 @@
 {% extends 'app/base.html' %}
 
-
-
+{%load crispy_forms_tags%}
 
 
 
@@ -14,7 +13,7 @@
     {% csrf_token %}
 
 
-    {{ form }}
+    {{form | crispy}}
 
     
 

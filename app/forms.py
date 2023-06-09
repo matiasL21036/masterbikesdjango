@@ -7,8 +7,15 @@ class ArrendarForm(forms.ModelForm):
         model = arrendar
         fields = '__all__'
 
+       
+
+
 class ProductoForm(forms.ModelForm):
 
     class Meta:
         model = producto
         fields = '__all__'
+        widgets = {
+
+            "fecha_fabricacion" : forms.SelectDateWidget()
+        }
