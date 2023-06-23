@@ -1,53 +1,28 @@
-{%extends 'app/base.html'%}
+{%extends 'app/base.html'%} {%load humanize%} {%block contenido%}
 
-{%load humanize%}
+<table class="table table-striped table-hover">
+  <tr>
+    <th>nombre</th>
+    <th>precio</th>
+    <th>marca</th>
+    <th>¿nuevo?</th>
+    <th>opciones</th>
+  </tr>
+  {%for p in productos%}
+  <tr>
+    <td>{{p.nombre | title}}</td>
 
+    <td>{{p.precio | intcomma}}</td>
 
+    <td>{{p.Marca | title}}</td>
 
-{%block contenido%}
-
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>nombre</th>
-            <th>precio</th>
-            <th>marca</th>
-            <th>¿nuevo?</th>
-            <th>opciones</th>
-
-        </tr>
-        {%for p in productos%}
-        <tr>
-            <td> {{p.nombre | title}}</td>
-        
-        
-            <td> {{p.precio | intcomma}}</td>
-       
-       
-            <td> {{p.Marca | title}}</td>
-        
-
-            <td>
-                {%if p.nuevo%}
-                si
-                {% else %}
-                no
-
-                {% endif %}
-
-            </td>
-            <td>
-                <a href="{% url 'modificar' p.id %}"> modificar</a>
-                <a href="{% url 'eliminar' p.id %}"> eliminar</a>
-            
-            </td>
-        </tr>  
-        {%endfor%}
-
-
-    </table>
-
-
-
-
+    <td>{%if p.nuevo%} si {% else %} no {% endif %}</td>
+    <td>
+      <a href="{% url 'modificar' p.id %}"> modificar</a>
+      <a href="{% url 'eliminar' p.id %}"> eliminar</a>
+    </td>
+  </tr>
+  {%endfor%}
+</table>
 
 {%endblock%}
