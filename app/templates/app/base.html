@@ -65,6 +65,29 @@
                 >listar productos</a
               >
             </li>
+
+            {%if user.is_authenticated%}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"
+                >cerrar sesion</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'modificaruser' user.username %}"
+                >Modificar user</a
+              >
+            </li>
+
+            {%else%}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login'  %}"
+                >Iniciar sesion</a
+              >
+            </li>
+
+            {%endif%}
           </ul>
           <form class="d-flex">
             <input

@@ -138,14 +138,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
-
-
-
-
-
-
-
 import os 
 
 MEDIA_URL = '/media/'
