@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import producto,arrendar
 from .forms import ArrendarForm,ProductoForm, OrdenReparacionForm, CustomUserCreationForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
@@ -31,7 +32,6 @@ def agregarprod(request):
     data = {
         'form': ProductoForm()
     }
-
     if request.method == 'POST':
         formulario = ProductoForm(request.POST, request.FILES)
         if formulario.is_valid():
@@ -103,3 +103,18 @@ def arreglar(request):
             messages.error(request, "Error al crear orden de reparacion" )
             data['form'] = formulario
     return render(request, 'app/user/arreglar.html', data)
+
+
+def modificarUser(request, username):
+    user = get_object_or_404(User, username=username)
+    data = {
+        'form': CustomUserCreationForm(instance=user)
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST, instance=user)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="home")
+        data['form'] = formulario
+    return render(request, 'registration/modificar.html', data)
